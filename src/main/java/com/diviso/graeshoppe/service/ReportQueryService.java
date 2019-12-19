@@ -20,13 +20,13 @@ public interface ReportQueryService {
 	
 	public ResponseEntity<ReportSummary> createReportSummary(String expectedDelivery, String storeName);
 
-	ResponseEntity<PageOfOrderMaster> findByExpectedDeliveryBetweenAndStoreIdpcode(OffsetDateTime from, String storeIdpcode, OffsetDateTime to, Integer page, Integer size, List<String> sort);
+	public ResponseEntity<PageOfOrderMaster> findByExpectedDeliveryBetweenAndStoreIdpcode(OffsetDateTime from, String storeIdpcode, OffsetDateTime to, Integer page, Integer size, List<String> sort);
 	
 	public Long countByExpectedDeliveryAndOrderStatus(OffsetDateTime date, String orderStatus);
 
 	public Long countByOrderStatus(String orderStatus);
 	
-	ResponseEntity<PageOfOrderMaster> findByExpectedDeliveryBetween(OffsetDateTime from, OffsetDateTime to,Integer page, Integer size, List<String> sort);
+	public ResponseEntity<PageOfOrderMaster> findByExpectedDeliveryBetween(OffsetDateTime from, OffsetDateTime to,Integer page, Integer size, List<String> sort);
 
 	public ResponseEntity<byte[]> getReportAsPdf(String orderNumber);
 	
