@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.diviso.graeshoppe.client.offer.model.DeductionValueTypeDTO;
+import com.diviso.graeshoppe.client.offer.model.OfferDTO;
 import com.diviso.graeshoppe.client.report.model.OrderMaster;
 import com.diviso.graeshoppe.client.report.model.PageOfOrderMaster;
 import com.diviso.graeshoppe.client.report.model.ReportSummary;
+import com.diviso.graeshoppe.service.OfferQueryService;
 /*import com.diviso.graeshoppe.client.administration.api.BannerResourceApi;
 import com.diviso.graeshoppe.client.administration.model.Banner;
 //import com.diviso.graeshoppe.client.administration.model.BannerDTO;
@@ -31,11 +34,11 @@ import com.diviso.graeshoppe.client.offer_resource.model.OfferDTO;
 import com.diviso.graeshoppe.client.order.model.Order;
 import com.diviso.graeshoppe.client.store.domain.Store;*/
 //import com.diviso.graeshoppe.client.store.model.Banner;
-import com.diviso.graeshoppe.service.QueryService;
+//import com.diviso.graeshoppe.service.QueryService;
 import com.diviso.graeshoppe.service.ReportQueryService;
 
 /**
- * REST controller for managing Offer query service.
+ * REST controller for managing query service.
  */
 @RestController
 @RequestMapping("/api/query")
@@ -43,9 +46,14 @@ public class QueryResource {
 	
 	 @Autowired
 	 ReportQueryService reportQueryService;
+	 
+	 @Autowired
+	 OfferQueryService offerQueryService;
 	
 	 private final Logger log = LoggerFactory.getLogger(QueryResource.class);
 
+	 //report apis
+	 
 	 @GetMapping("/report/{date}/{storeId}")
 		public ResponseEntity<ReportSummary> createReportSummary(@PathVariable LocalDate date,@PathVariable String storeId) {
 			return reportQueryService.createReportSummary(date,storeId);
@@ -101,7 +109,35 @@ public class QueryResource {
 		      return reportQueryService.getSaleReportAsPdf(storeidpcode);
 		 }
 			 
-	 
+	 //offer apis
+		 
+		 /**
+		     * GET  /deduction-value-types : get all the deductionValueTypes of offers.
+		     *
+		     * @param pageable the pagination information
+		     * @return the ResponseEntity with status 200 (OK) and the list of deductionValueTypes in body
+		     */
+		 @GetMapping("/offers/get-all-deduction-value-types")
+		  public ResponseEntity<List<DeductionValueTypeDTO>> getAllDeductionValueTypes(Pageable pageable) {
+		      log.debug("REST request to get a page of DeductionValueTypes");
+		      
+		      return offerQueryService.findAllDeductionValueTypes(pageable);
+		   }
+		 
+		 	/**
+		     * GET  /offers : get all the offers.
+		     *
+		     * @param pageable the pagination information
+		     * @return the ResponseEntity with status 200 (OK) and the list of offers in body
+		     */
+		    @GetMapping("/offers/get-all-offers")
+		    public ResponseEntity<List<OfferDTO>> getAllOffers(Pageable pageable) {
+		        log.debug("REST request to get a page of Offers");
+		       
+		        return offerQueryService.findAllOffers(pageable);
+		    }
+		 
+		 
 }
 
 
