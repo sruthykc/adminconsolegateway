@@ -1,5 +1,13 @@
 package com.diviso.graeshoppe.service.impl;
-
+import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
+import static org.elasticsearch.index.query.QueryBuilders.termQuery;
+import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.search.aggregations.bucket.terms.Terms;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.sort.FieldSortBuilder;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -7,6 +15,8 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -21,14 +31,20 @@ import com.diviso.graeshoppe.client.administration.model.CancelledOrderLineDTO;
 import com.diviso.graeshoppe.client.administration.model.DataResponse;
 import com.diviso.graeshoppe.client.administration.model.NotificationDTO;
 import com.diviso.graeshoppe.client.administration.model.RefoundDetailsDTO;
+import com.diviso.graeshoppe.client.store.model.Store;
 import com.diviso.graeshoppe.service.AdministrationQueryService;
+import com.diviso.graeshoppe.web.rest.util.ServiceUtility;
 
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
 @Service
 public class AdministrationQueryServiceImpl implements AdministrationQueryService{
 	
 	private Logger log = LoggerFactory.getLogger(AdministrationQueryServiceImpl.class);
+	@Autowired
 	
-
+	ServiceUtility serviceUtility;
 	@Autowired
 	CancellationRequestResourceApi cancellationRequestResourceApi;
 	
@@ -160,6 +176,20 @@ public class AdministrationQueryServiceImpl implements AdministrationQueryServic
 			List<String> sort) {
 		log.debug("<<<<<<<<<<< searchRefundDetails >>>>>>>>",query,page,size,sort);
 		return searchRefundDetails(query, page, size, sort);
+	}
+
+	@Override
+	public Page<Store> findStoreByName(String name, Pageable pageable) {
+		
+		log.debug("<<<<<<<<< findStoreByName>>>>>>>>>", name);
+		QueryBuilder queryDsl =matchQuery("name", name).prefixLength(3);
+
+		SearchSourceBuilder builder = new SearchSourceBuilder();
+		builder.query(queryDsl);
+		SearchResponse sr = serviceUtility.searchResponseForPage("store", builder, pageable);
+
+		return serviceUtility.getPageResult(sr, pageable, new Store());
+		
 	}
 	
 

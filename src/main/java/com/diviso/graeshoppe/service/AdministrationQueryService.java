@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 import com.diviso.graeshoppe.client.administration.model.BannerDTO;
@@ -12,6 +14,7 @@ import com.diviso.graeshoppe.client.administration.model.CancelledOrderLineDTO;
 import com.diviso.graeshoppe.client.administration.model.DataResponse;
 import com.diviso.graeshoppe.client.administration.model.NotificationDTO;
 import com.diviso.graeshoppe.client.administration.model.RefoundDetailsDTO;
+import com.diviso.graeshoppe.client.store.model.Store;
 
 public interface AdministrationQueryService {
 
@@ -80,6 +83,6 @@ public interface AdministrationQueryService {
 	ResponseEntity<List<RefoundDetailsDTO>> searchRefundDetails(String query, Integer page, Integer size,
 			List<String> sort);
 	
-	
+	public Page<Store> findStoreByName(String name, Pageable pageable);
     
 }

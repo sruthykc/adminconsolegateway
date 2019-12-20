@@ -31,6 +31,7 @@ import com.diviso.graeshoppe.client.offer.model.OfferDTO;
 import com.diviso.graeshoppe.client.report.model.OrderMaster;
 import com.diviso.graeshoppe.client.report.model.PageOfOrderMaster;
 import com.diviso.graeshoppe.client.report.model.ReportSummary;
+import com.diviso.graeshoppe.client.store.model.Store;
 import com.diviso.graeshoppe.service.AdministrationQueryService;
 import com.diviso.graeshoppe.service.OfferQueryService;
 /*import com.diviso.graeshoppe.client.administration.api.BannerResourceApi;
@@ -361,6 +362,11 @@ public class QueryResource {
 			public ResponseEntity<List<RefoundDetailsDTO>> searchRefundDetails(@PathVariable String query,@RequestParam Integer page,@RequestParam Integer size,@RequestParam List<String> sort){
 				log.debug("<<<<<<<<<<<  searchRefundDetails >>>>>>>>>",query,page,sort);
 				return administrationQueryService.searchRefundDetails(query, page,size,sort);
+			}
+			
+			@GetMapping("/findStore/{name}")
+			public Page<Store> findStoreBySearchTerm(@PathVariable String name, Pageable pageable) {
+				return administrationQueryService.findStoreByName(name, pageable);
 			}
 
 }

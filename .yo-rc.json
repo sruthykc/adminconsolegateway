@@ -36,8 +36,8 @@
     },
     "generator-jhipster-swagger-cli": {
         "promptValues": {
-            "inputSpec": "http://34.66.8.163:8081/v2/api-docs",
-            "cliName": "administration"
+            "inputSpec": "http://dev.ci1.divisosofttech.com:8071/v2/api-docs",
+            "cliName": "store"
         },
         "apis": {
             "report": {
@@ -48,6 +48,9 @@
             },
             "administration": {
                 "spec": "http://34.66.8.163:8081/v2/api-docs"
+            },
+            "store": {
+                "spec": "http://dev.ci1.divisosofttech.com:8071/v2/api-docs"
             }
         }
     }
