@@ -20,9 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.diviso.graeshoppe.client.administration.model.BannerDTO;
 import com.diviso.graeshoppe.client.administration.model.CancellationRequestDTO;
 import com.diviso.graeshoppe.client.administration.model.CancelledOrderLineDTO;
 import com.diviso.graeshoppe.client.administration.model.DataResponse;
+import com.diviso.graeshoppe.client.administration.model.NotificationDTO;
+import com.diviso.graeshoppe.client.administration.model.RefoundDetailsDTO;
 import com.diviso.graeshoppe.client.offer.model.DeductionValueTypeDTO;
 import com.diviso.graeshoppe.client.offer.model.OfferDTO;
 import com.diviso.graeshoppe.client.report.model.OrderMaster;
@@ -63,7 +66,6 @@ public class QueryResource {
 	 
 	 private final Logger log = LoggerFactory.getLogger(QueryResource.class);
 
-	 //report apis
 	 
 	 @GetMapping("/report/{date}/{storeId}")
 		public ResponseEntity<ReportSummary> createReportSummary(@PathVariable LocalDate date,@PathVariable String storeId) {
@@ -120,7 +122,7 @@ public class QueryResource {
 		      return reportQueryService.getSaleReportAsPdf(storeidpcode);
 		 }
 			 
-	 //offer apis
+	
 		 
 		 /**
 		     * GET  /deduction-value-types : get all the deductionValueTypes of offers.
@@ -171,7 +173,7 @@ public class QueryResource {
 		    	return offerQueryService.findOfferByPromoCode(promoCode);
 		    }
 		    
-		    //cancellation apis
+		   
 		    
 		    /**
 		     * GET  /cancellation-requests : get all the cancellationRequests.
@@ -267,7 +269,6 @@ public class QueryResource {
 		    	return administrationQueryService.searchCancellationRequests(query, page, size, sort);
 		    }
 		    
-		    //cancelled order-lines
 		    
 		    /**
 		     * GET  /cancelled-order-lines : get all the cancelledOrderLines.
@@ -306,6 +307,61 @@ public class QueryResource {
 		       
 		    	return administrationQueryService.searchCancelledOrderLines(query, page, size, sort);
 		    }
+
+		    /**
+			 * @author Prince
+			 * 
+			 */
+			 @GetMapping("/banners")
+			 public ResponseEntity<List<BannerDTO>> getAllBanners(@RequestParam Integer page,@RequestParam Integer size,@RequestParam List<String> sort){
+				 log.debug("<<<<<<<<<  getAllBanners >>>>>>>>>>>>");
+				return administrationQueryService.findAllBanners(page,size,sort);
+				
+				 
+			 }
+			@GetMapping("/banners/{id}")
+			public ResponseEntity<BannerDTO> getBanner(@PathVariable Long id){
+				log.debug("<<<<<<<< getBanner >>>>>>>",id);
+				return administrationQueryService.findBanner(id);
+				
+			}
+			@GetMapping("/_search/banners/")
+			public ResponseEntity<List<BannerDTO>> searchBanner(@PathVariable String query,@RequestParam Integer page,@RequestParam Integer size,@RequestParam List<String> sort){
+				log.debug("<<<<<<< searchBanner >>>>>>>",query);
+				return administrationQueryService.searchBanners(query, page,size,sort);
+			}
+			@GetMapping("/notifications/{id}")
+			public ResponseEntity<NotificationDTO> getNotification(@PathVariable Long id){
+				log.debug("<<<<<<<<<<< getNotification >>>>>>>>>>",id);
+				return administrationQueryService.findNotification(id);
+			}
+			@GetMapping("/notifications")
+			public ResponseEntity<List<NotificationDTO>> getAllNotifications(@RequestParam Integer page,@RequestParam Integer size,@RequestParam List<String> sort){
+				log.debug("<<<<<<<<< getAllNotifications >>>>>>>>>",page,size,sort);
+				return administrationQueryService.findAllNotifications(page,size,sort);
+				
+			}
+			@GetMapping("/_search/notifications")
+			public ResponseEntity<List<NotificationDTO>> searchNotifications(@PathVariable String query,@RequestParam Integer page,@RequestParam Integer size,@RequestParam List<String> sort){
+				log.debug("<<<<<<<<<<<  searchNotifications >>>>>>>>>",query,page,sort);
+				return administrationQueryService.searchNotifications(query, page,size,sort);
+			}
+			@GetMapping("/refund-details/{id}")
+			public ResponseEntity<RefoundDetailsDTO> getRefundDetails(@PathVariable Long id){
+				log.debug("<<<<<<<<<<< getRefundDetails >>>>>>>>>>",id);
+				return administrationQueryService.findRefundDetails(id);
+			}
+			@GetMapping("/refund-details")
+			public ResponseEntity<List<RefoundDetailsDTO>> getAllRefundDetails(@RequestParam Integer page,@RequestParam Integer size,@RequestParam List<String> sort){
+				log.debug("<<<<<<<<< getAllRefundDetails >>>>>>>>>",page,size,sort);
+				return administrationQueryService.findAllRefundDetails(page,size,sort);
+				
+			}
+			@GetMapping("/_search/refund-details")
+			public ResponseEntity<List<RefoundDetailsDTO>> searchRefundDetails(@PathVariable String query,@RequestParam Integer page,@RequestParam Integer size,@RequestParam List<String> sort){
+				log.debug("<<<<<<<<<<<  searchRefundDetails >>>>>>>>>",query,page,sort);
+				return administrationQueryService.searchRefundDetails(query, page,size,sort);
+			}
 
 }
 

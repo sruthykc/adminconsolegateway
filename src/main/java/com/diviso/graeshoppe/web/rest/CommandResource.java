@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.diviso.graeshoppe.client.administration.model.BannerDTO;
 import com.diviso.graeshoppe.client.administration.model.CancellationRequestDTO;
 import com.diviso.graeshoppe.client.administration.model.CancelledOrderLineDTO;
+import com.diviso.graeshoppe.client.administration.model.NotificationDTO;
+import com.diviso.graeshoppe.client.administration.model.RefoundDetailsDTO;
 import com.diviso.graeshoppe.client.offer.model.DeductionValueTypeDTO;
 import com.diviso.graeshoppe.client.offer.model.OfferModel;
 import com.diviso.graeshoppe.client.offer.model.OrderModel;
@@ -71,9 +74,7 @@ public class CommandResource {
 	    	return offerCommandService.createDeductionValueType(deductionValueTypeDTO);
 	    }
 
-	    
-	    //cancellation request
-	    
+	  
 	    /**
 	     * POST  /cancellation-requests : Create a new cancellationRequest.
 	     *
@@ -113,8 +114,7 @@ public class CommandResource {
 	    }
 
 	    
-	    //cancelled order-line
-	    
+	   
 	    /**
 	     * POST  /cancelled-order-lines : Create a new cancelledOrderLine.
 	     *
@@ -154,7 +154,62 @@ public class CommandResource {
 	    	return administrationCommandService.updateCancelledOrderLine(cancelledOrderLineDTO);
 	    }
 	    
-	    
+	    /**
+		  * @author Prince
+		  * @swaggerMicrosewrvice administartion
+		  * 
+		  */
+		 @PostMapping("/banners")
+		 public ResponseEntity<BannerDTO> createBanner(@RequestBody BannerDTO bannerDTO){
+			 log.debug("<<<<<<<< createBanner >>>>>>>",bannerDTO);
+			 
+			return administrationCommandService.createBanner(bannerDTO); 
+		 }
+		 @PutMapping("/banners")
+		 public ResponseEntity<BannerDTO> updateBanner(@RequestBody BannerDTO bannerDTO){
+			 log.debug("<<<<<<<<<<< updateBanner >>>>>>>>",bannerDTO);
+			return administrationCommandService.updateBanner(bannerDTO);
+			 
+		 }
+		 @DeleteMapping("/banners/{id}")
+		 public ResponseEntity<Void> deleteBanner(@PathVariable Long id){
+			 log.debug("<<<<<<<< deleteBanner>>>>>>>",id);
+			return administrationCommandService.deleteBanner(id);
+			 
+		 }
+		 @PostMapping("/notifications")
+		 public ResponseEntity<NotificationDTO> createNotification(@RequestBody NotificationDTO notificationDTO){
+			 log.debug("<<<<<<<<<< createNotification >>>>>>>>>", notificationDTO);
+			return administrationCommandService.createNotification(notificationDTO);
+		 }
+		 @PutMapping("/notifications")
+		 public ResponseEntity<NotificationDTO> updateNotification(@RequestBody NotificationDTO notificationDTO){
+			 log.debug("<<<<<<<<<< updateNotification >>>>>>>>>>>>>",notificationDTO);
+			return administrationCommandService.updateNotification(notificationDTO);
+		 }
+		 @DeleteMapping("/notifications/{id}")
+		 public ResponseEntity<Void> deleteNotification(@PathVariable Long id){
+			 log.debug("<<<<<<<<<<< deleteNotification >>>>>>>>>>>",id);
+			return administrationCommandService.deleteNotification(id);
+			 
+		 }
+		 @PostMapping("/refund-details/{orderId}")
+		 public ResponseEntity<RefoundDetailsDTO> createRefundDetails(@RequestBody RefoundDetailsDTO refoundDetailsDTO,@PathVariable String orderId){
+			 log.debug("<<<<<<<<<<< createRefundDetails >>>>>>>>>",refoundDetailsDTO,orderId);
+			return administrationCommandService.createRefundDetails(refoundDetailsDTO,orderId);
+			 
+		 }
+		 @PutMapping("/refund-details")
+		 public ResponseEntity<RefoundDetailsDTO> updateRefundDetails(@RequestBody RefoundDetailsDTO refundDetailsDTO){
+			 log.debug("<<<<<<<<<< updateNotification >>>>>>>>>>>>>",refundDetailsDTO);
+			return administrationCommandService.updateRefundDetails(refundDetailsDTO);
+		 }
+		 @DeleteMapping("/refund-details/{id}")
+		 public ResponseEntity<Void> deleteRefundDetails(@PathVariable Long id){
+			 log.debug("<<<<<<<<< deleteRefoundDetails >>>>>>>>>>>",id);
+			return administrationCommandService.deleteRefundDetails(id);
+		 }
+
 	    
 	    
 	    
