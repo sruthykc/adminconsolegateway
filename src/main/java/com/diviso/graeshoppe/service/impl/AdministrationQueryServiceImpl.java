@@ -62,9 +62,9 @@ public class AdministrationQueryServiceImpl implements AdministrationQueryServic
 
 
 	@Override
-	public ResponseEntity<List<CancellationRequestDTO>> getAllCancellationRequests(Integer page, Integer size, List<String> sort) {
+	public ResponseEntity<List<CancellationRequestDTO>> getAllCancellationRequests(Pageable pageable) {
 		
-		return cancellationRequestResourceApi.getAllCancellationRequestsUsingGET(page, size, sort);
+		return cancellationRequestResourceApi.getAllCancellationRequestsUsingGET(null, null, null);
 	}
 
 	@Override
@@ -93,17 +93,15 @@ public class AdministrationQueryServiceImpl implements AdministrationQueryServic
 	}
 
 	@Override
-	public ResponseEntity<List<CancellationRequestDTO>> searchCancellationRequests(String query, Integer page, Integer size,
-			List<String> sort) {
+	public ResponseEntity<List<CancellationRequestDTO>> searchCancellationRequests(String query,Pageable pageable) {
 		
-		return cancellationRequestResourceApi.searchCancellationRequestsUsingGET(query, page, size, sort);
+		return cancellationRequestResourceApi.searchCancellationRequestsUsingGET(query, null, null, null);
 	}
 
 	@Override
-	public ResponseEntity<List<CancelledOrderLineDTO>> findAllCancelledOrderLines(Integer page, Integer size,
-			List<String> sort) {
+	public ResponseEntity<List<CancelledOrderLineDTO>> findAllCancelledOrderLines(Pageable pageable) {
 		
-		return cancelledOrderLineResourceApi.getAllCancelledOrderLinesUsingGET(page, size, sort);
+		return cancelledOrderLineResourceApi.getAllCancelledOrderLinesUsingGET(null, null, null);
 	}
 
 	@Override
@@ -113,18 +111,17 @@ public class AdministrationQueryServiceImpl implements AdministrationQueryServic
 	}
 
 	@Override
-	public ResponseEntity<List<CancelledOrderLineDTO>> searchCancelledOrderLines(String query, Integer page,
-			Integer size, List<String> sort) {
+	public ResponseEntity<List<CancelledOrderLineDTO>> searchCancelledOrderLines(String query, Pageable pageable) {
 		
-		return cancelledOrderLineResourceApi.searchCancelledOrderLinesUsingGET(query, page, size, sort);
+		return cancelledOrderLineResourceApi.searchCancelledOrderLinesUsingGET(query, null, null, null);
 	}
 	
 	 
 	
 	@Override
-	public ResponseEntity<List<BannerDTO>> findAllBanners(Integer page, Integer size, List<String> sort) {
-		log.debug("<<<<<<<<<< getAllBanners >>>>>>>>>>",page, size, sort);
-		return bannerResourceApi.getAllBannersUsingGET(page, size, sort);
+	public ResponseEntity<List<BannerDTO>> findAllBanners(Pageable pageable) {
+		
+		return bannerResourceApi.getAllBannersUsingGET(null, null, null);
 	}
 
 	@Override
@@ -134,10 +131,12 @@ public class AdministrationQueryServiceImpl implements AdministrationQueryServic
 	}
 
 	@Override
-	public ResponseEntity<List<BannerDTO>> searchBanners(String query, Integer page, Integer size, List<String> sort) {
+	public ResponseEntity<List<BannerDTO>> searchBanners(String query,Pageable pageable) {
 		log.debug("<<<<<<<< searchBanners >>>>>>>>",query);
-		return bannerResourceApi.searchBannersUsingGET(query, page,size,sort);
+		return bannerResourceApi.searchBannersUsingGET(query, null, null, null);
 	}
+	
+	
 	
 	@Override
 	public ResponseEntity<NotificationDTO> findNotification(Long id) {
@@ -146,16 +145,15 @@ public class AdministrationQueryServiceImpl implements AdministrationQueryServic
 	}
 
 	@Override
-	public ResponseEntity<List<NotificationDTO>> findAllNotifications(Integer page, Integer size, List<String> sort) {
-		log.debug("<<<<<<<<<< findAllNotifications >>>>>>>>>>>",page,size,sort);
-		return notificationResourceApi.getAllNotificationsUsingGET(page, size, sort);
+	public ResponseEntity<List<NotificationDTO>> findAllNotifications(Pageable pageable) {
+		log.debug("<<<<<<<<<< findAllNotifications >>>>>>>>>>>");
+		return notificationResourceApi.getAllNotificationsUsingGET(null, null, null);
 	}
 
 	@Override
-	public ResponseEntity<List<NotificationDTO>> searchNotifications(String query, Integer page, Integer size,
-			List<String> sort) {
-		log.debug("<<<<<<<<<<< searchNotifications >>>>>>>>>",query,page,size,sort);
-		return notificationResourceApi.searchNotificationsUsingGET(query, page, size, sort);
+	public ResponseEntity<List<NotificationDTO>> searchNotifications(String query, Pageable pageable) {
+		log.debug("<<<<<<<<<<< searchNotifications >>>>>>>>>{}",query);
+		return notificationResourceApi.searchNotificationsUsingGET(query, null, null, null);
 	}
 	
 
@@ -166,16 +164,15 @@ public class AdministrationQueryServiceImpl implements AdministrationQueryServic
 	}
 
 	@Override
-	public ResponseEntity<List<RefoundDetailsDTO>> findAllRefundDetails(Integer page, Integer size, List<String> sort) {
-		log.debug("<<<<<<findAllRefundDetails >>>>>>>>>>",page,size,sort);
-		return refundDetailsResourceApi.getAllRefoundDetailsUsingGET(page, size, sort);
+	public ResponseEntity<List<RefoundDetailsDTO>> findAllRefundDetails(Pageable pageable) {
+		log.debug("<<<<<<findAllRefundDetails >>>>>>>>>>");
+		return refundDetailsResourceApi.getAllRefoundDetailsUsingGET(null, null, null);
 	}
 
 	@Override
-	public ResponseEntity<List<RefoundDetailsDTO>> searchRefundDetails(String query, Integer page, Integer size,
-			List<String> sort) {
-		log.debug("<<<<<<<<<<< searchRefundDetails >>>>>>>>",query,page,size,sort);
-		return searchRefundDetails(query, page, size, sort);
+	public ResponseEntity<List<RefoundDetailsDTO>> searchRefundDetails(String query,Pageable pageable) {
+		log.debug("<<<<<<<<<<< searchRefundDetails >>>>>>>>{}",query);
+		return refundDetailsResourceApi.searchRefoundDetailsUsingGET(query, null, null, null);
 	}
 
 	@Override

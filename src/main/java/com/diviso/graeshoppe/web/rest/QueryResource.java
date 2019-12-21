@@ -34,17 +34,6 @@ import com.diviso.graeshoppe.client.report.model.ReportSummary;
 import com.diviso.graeshoppe.client.store.model.Store;
 import com.diviso.graeshoppe.service.AdministrationQueryService;
 import com.diviso.graeshoppe.service.OfferQueryService;
-/*import com.diviso.graeshoppe.client.administration.api.BannerResourceApi;
-import com.diviso.graeshoppe.client.administration.model.Banner;
-//import com.diviso.graeshoppe.client.administration.model.BannerDTO;
-import com.diviso.graeshoppe.client.offer_resource.api.AggregateQueryResourceApi;
-import com.diviso.graeshoppe.client.offer_resource.api.DeductionValueTypeResourceApi;
-import com.diviso.graeshoppe.client.offer_resource.model.DeductionValueTypeDTO;
-import com.diviso.graeshoppe.client.offer_resource.model.OfferDTO;
-import com.diviso.graeshoppe.client.order.model.Order;
-import com.diviso.graeshoppe.client.store.domain.Store;*/
-//import com.diviso.graeshoppe.client.store.model.Banner;
-//import com.diviso.graeshoppe.service.QueryService;
 import com.diviso.graeshoppe.service.ReportQueryService;
 
 import io.swagger.annotations.ApiParam;
@@ -79,8 +68,8 @@ public class QueryResource {
 	  }
 	 
 	 @GetMapping("/findOrderByDatebetweenAndStoreId/{from}/{storeId}/{to}")
-		public ResponseEntity<PageOfOrderMaster> findOrderByDatebetweenAndStoreId(@PathVariable OffsetDateTime from,@PathVariable String storeId,@PathVariable OffsetDateTime to,@RequestParam Integer page,@RequestParam Integer size,@RequestParam List<String> sort){
-			return reportQueryService.findByExpectedDeliveryBetweenAndStoreIdpcode(from,storeId,to,page,size,sort);
+		public ResponseEntity<PageOfOrderMaster> findOrderByDatebetweenAndStoreId(@PathVariable OffsetDateTime from,@PathVariable String storeId,@PathVariable OffsetDateTime to,Pageable pageable){
+			return reportQueryService.findByExpectedDeliveryBetweenAndStoreIdpcode(from,storeId,to,pageable);
 	}
 	 
 	 @GetMapping("/findOrderCountByDateAndStatusName/{date}/{statusName}")
@@ -94,8 +83,8 @@ public class QueryResource {
 	  }
 	 
 	 @GetMapping("/findOrderMasterByExpectedDeliveryBetween/{from}/{to}")
-		public ResponseEntity<PageOfOrderMaster> findOrderMasterByExpectedDeliveryBetween(@PathVariable OffsetDateTime from,@PathVariable OffsetDateTime to,@RequestParam Integer page,@RequestParam Integer size,@RequestParam List<String> sort){
-			return  reportQueryService.findByExpectedDeliveryBetween(from,to,page,size,sort);
+		public ResponseEntity<PageOfOrderMaster> findOrderMasterByExpectedDeliveryBetween(@PathVariable OffsetDateTime from,@PathVariable OffsetDateTime to,Pageable pageable){
+			return  reportQueryService.findByExpectedDeliveryBetween(from,to,pageable);
 	}
 	 
 	 
@@ -183,9 +172,9 @@ public class QueryResource {
 		     * @return the ResponseEntity with status 200 (OK) and the list of cancellationRequests in body
 		     */
 		    @GetMapping("/cancellation-requests")
-		    public ResponseEntity<List<CancellationRequestDTO>> getAllCancellationRequests(@RequestParam Integer page,@RequestParam Integer size,@RequestParam List<String> sort) {
+		    public ResponseEntity<List<CancellationRequestDTO>> getAllCancellationRequests(Pageable pageable) {
 		       
-		        return administrationQueryService.getAllCancellationRequests(page, size, sort);
+		        return administrationQueryService.getAllCancellationRequests(pageable);
 		    }
 		    
 		    /**
@@ -265,9 +254,9 @@ public class QueryResource {
 		     * @return the result of the search
 		     */
 		    @GetMapping("/_search/cancellation-requests")
-		    public ResponseEntity<List<CancellationRequestDTO>> searchCancellationRequests(@RequestParam String query, @RequestParam Integer page,@RequestParam Integer size,@RequestParam List<String> sort) {
+		    public ResponseEntity<List<CancellationRequestDTO>> searchCancellationRequests(@RequestParam String query,Pageable pageable) {
 		       
-		    	return administrationQueryService.searchCancellationRequests(query, page, size, sort);
+		    	return administrationQueryService.searchCancellationRequests(query,pageable);
 		    }
 		    
 		    
@@ -278,9 +267,9 @@ public class QueryResource {
 		     * @return the ResponseEntity with status 200 (OK) and the list of cancelledOrderLines in body
 		     */
 		    @GetMapping("/cancelled-order-lines")
-		    public ResponseEntity<List<CancelledOrderLineDTO>> getAllCancelledOrderLines(@RequestParam Integer page,@RequestParam Integer size,@RequestParam List<String> sort) {
+		    public ResponseEntity<List<CancelledOrderLineDTO>> getAllCancelledOrderLines(Pageable pageable) {
 		        
-		    	return administrationQueryService.findAllCancelledOrderLines(page, size, sort);
+		    	return administrationQueryService.findAllCancelledOrderLines(pageable);
 		    }
 		    
 		    /**
@@ -304,9 +293,9 @@ public class QueryResource {
 		     * @return the result of the search
 		     */
 		    @GetMapping("/_search/cancelled-order-lines")
-		    public ResponseEntity<List<CancelledOrderLineDTO>> searchCancelledOrderLines(@RequestParam String query,@RequestParam Integer page,@RequestParam Integer size,@RequestParam List<String> sort) {
+		    public ResponseEntity<List<CancelledOrderLineDTO>> searchCancelledOrderLines(@RequestParam(value = "query", required = true) String query,Pageable pageable) {
 		       
-		    	return administrationQueryService.searchCancelledOrderLines(query, page, size, sort);
+		    	return administrationQueryService.searchCancelledOrderLines(query,pageable);
 		    }
 
 		    /**
@@ -314,60 +303,74 @@ public class QueryResource {
 			 * 
 			 */
 			 @GetMapping("/banners")
-			 public ResponseEntity<List<BannerDTO>> getAllBanners(@RequestParam Integer page,@RequestParam Integer size,@RequestParam List<String> sort){
+			 public ResponseEntity<List<BannerDTO>> getAllBanners(Pageable pageable){
 				 log.debug("<<<<<<<<<  getAllBanners >>>>>>>>>>>>");
-				return administrationQueryService.findAllBanners(page,size,sort);
+				return administrationQueryService.findAllBanners(pageable);
 				
-				 
 			 }
+			 
 			@GetMapping("/banners/{id}")
 			public ResponseEntity<BannerDTO> getBanner(@PathVariable Long id){
 				log.debug("<<<<<<<< getBanner >>>>>>>",id);
 				return administrationQueryService.findBanner(id);
 				
 			}
+			
 			@GetMapping("/_search/banners/")
-			public ResponseEntity<List<BannerDTO>> searchBanner(@PathVariable String query,@RequestParam Integer page,@RequestParam Integer size,@RequestParam List<String> sort){
-				log.debug("<<<<<<< searchBanner >>>>>>>",query);
-				return administrationQueryService.searchBanners(query, page,size,sort);
+			public ResponseEntity<List<BannerDTO>> searchBanner(@PathVariable String query,Pageable pageable){
+				log.debug("<<<<<<< searchBanner >>>>>>>{}",query);
+				return administrationQueryService.searchBanners(query,pageable);
 			}
+			
+			
 			@GetMapping("/notifications/{id}")
 			public ResponseEntity<NotificationDTO> getNotification(@PathVariable Long id){
 				log.debug("<<<<<<<<<<< getNotification >>>>>>>>>>",id);
 				return administrationQueryService.findNotification(id);
 			}
+			
 			@GetMapping("/notifications")
-			public ResponseEntity<List<NotificationDTO>> getAllNotifications(@RequestParam Integer page,@RequestParam Integer size,@RequestParam List<String> sort){
-				log.debug("<<<<<<<<< getAllNotifications >>>>>>>>>",page,size,sort);
-				return administrationQueryService.findAllNotifications(page,size,sort);
+			public ResponseEntity<List<NotificationDTO>> getAllNotifications(Pageable pageable){
+				log.debug("<<<<<<<<< getAllNotifications >>>>>>>>>");
+				return administrationQueryService.findAllNotifications(pageable);
 				
 			}
+			
 			@GetMapping("/_search/notifications")
-			public ResponseEntity<List<NotificationDTO>> searchNotifications(@PathVariable String query,@RequestParam Integer page,@RequestParam Integer size,@RequestParam List<String> sort){
-				log.debug("<<<<<<<<<<<  searchNotifications >>>>>>>>>",query,page,sort);
-				return administrationQueryService.searchNotifications(query, page,size,sort);
+			public ResponseEntity<List<NotificationDTO>> searchNotifications(@RequestParam String query,Pageable pageable){
+				log.debug("<<<<<<<<<<<  searchNotifications >>>>>>>>>{}",query);
+				return administrationQueryService.searchNotifications(query,pageable);
 			}
+			
 			@GetMapping("/refund-details/{id}")
 			public ResponseEntity<RefoundDetailsDTO> getRefundDetails(@PathVariable Long id){
 				log.debug("<<<<<<<<<<< getRefundDetails >>>>>>>>>>",id);
 				return administrationQueryService.findRefundDetails(id);
 			}
+			
 			@GetMapping("/refund-details")
-			public ResponseEntity<List<RefoundDetailsDTO>> getAllRefundDetails(@RequestParam Integer page,@RequestParam Integer size,@RequestParam List<String> sort){
-				log.debug("<<<<<<<<< getAllRefundDetails >>>>>>>>>",page,size,sort);
-				return administrationQueryService.findAllRefundDetails(page,size,sort);
+			public ResponseEntity<List<RefoundDetailsDTO>> getAllRefundDetails(Pageable pageable){
+				log.debug("<<<<<<<<< getAllRefundDetails >>>>>>>>>");
+				return administrationQueryService.findAllRefundDetails(pageable);
 				
 			}
+			
 			@GetMapping("/_search/refund-details")
-			public ResponseEntity<List<RefoundDetailsDTO>> searchRefundDetails(@PathVariable String query,@RequestParam Integer page,@RequestParam Integer size,@RequestParam List<String> sort){
-				log.debug("<<<<<<<<<<<  searchRefundDetails >>>>>>>>>",query,page,sort);
-				return administrationQueryService.searchRefundDetails(query, page,size,sort);
+			public ResponseEntity<List<RefoundDetailsDTO>> searchRefundDetails(@RequestParam String query,Pageable pageable){
+				log.debug("<<<<<<<<<<<  searchRefundDetails >>>>>>>>>{}",query);
+				return administrationQueryService.searchRefundDetails(query,pageable);
 			}
 			
 			@GetMapping("/findStore/{name}")
 			public Page<Store> findStoreBySearchTerm(@PathVariable String name, Pageable pageable) {
 				return administrationQueryService.findStoreByName(name, pageable);
 			}
+			
+		
+			
+			
+			
+			
 
 }
 

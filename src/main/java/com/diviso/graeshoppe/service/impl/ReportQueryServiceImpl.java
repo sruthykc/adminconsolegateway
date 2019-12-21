@@ -72,15 +72,15 @@ public class ReportQueryServiceImpl implements ReportQueryService {
 	}
 
 	@Override
-	public ResponseEntity<PageOfOrderMaster> findByExpectedDeliveryBetween(OffsetDateTime from, OffsetDateTime to, Integer page, Integer size, List<String> sort) {
+	public ResponseEntity<PageOfOrderMaster> findByExpectedDeliveryBetween(OffsetDateTime from, OffsetDateTime to, Pageable pageable) {
 	
-		return queryResourceApi.findOrderMasterByExpectedDeliveryBetweenUsingGET(from, to, page , size, sort);
+		return queryResourceApi.findOrderMasterByExpectedDeliveryBetweenUsingGET(from, to, null, null, null);
 	}
 
 	@Override
-	public ResponseEntity<PageOfOrderMaster> findByExpectedDeliveryBetweenAndStoreIdpcode(OffsetDateTime from, String storeIdpcode, OffsetDateTime to, Integer page, Integer size, List<String> sort) {
+	public ResponseEntity<PageOfOrderMaster> findByExpectedDeliveryBetweenAndStoreIdpcode(OffsetDateTime from, String storeIdpcode, OffsetDateTime to, Pageable pageable) {
 		
-		return queryResourceApi.findOrderByDatebetweenAndStoreIdUsingGET(from, storeIdpcode, to, page, size, sort);
+		return queryResourceApi.findOrderByDatebetweenAndStoreIdUsingGET(from, storeIdpcode, to, null, null, null);
 	}
 
 	

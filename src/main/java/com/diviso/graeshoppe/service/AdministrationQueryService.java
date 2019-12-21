@@ -18,7 +18,7 @@ import com.diviso.graeshoppe.client.store.model.Store;
 
 public interface AdministrationQueryService {
 
-	public ResponseEntity<List<CancellationRequestDTO>> getAllCancellationRequests(Integer page,Integer size,List<String> sort);
+	public ResponseEntity<List<CancellationRequestDTO>> getAllCancellationRequests(Pageable pageable);
 	
 	/**
      * Get the "id" cancellationRequest.
@@ -50,9 +50,9 @@ public interface AdministrationQueryService {
      * @param pageable the pagination information
      * @return the list of entities
      */
-	public ResponseEntity<List<CancellationRequestDTO>> searchCancellationRequests(String query, Integer page,Integer size,List<String> sort);
+	public ResponseEntity<List<CancellationRequestDTO>> searchCancellationRequests(String query,Pageable pageable);
 
-	public ResponseEntity<List<CancelledOrderLineDTO>> findAllCancelledOrderLines(Integer page,Integer size,List<String> sort);
+	public ResponseEntity<List<CancelledOrderLineDTO>> findAllCancelledOrderLines(Pageable pageable);
 	
 	/**
      * Get the "id" cancelledOrderLine.
@@ -62,26 +62,25 @@ public interface AdministrationQueryService {
      */
     public ResponseEntity<CancelledOrderLineDTO> findCancelledOrderLine(Long id);
     
-    public ResponseEntity<List<CancelledOrderLineDTO>> searchCancelledOrderLines(String query,Integer page,Integer size,List<String> sort);
+    public ResponseEntity<List<CancelledOrderLineDTO>> searchCancelledOrderLines(String query,Pageable pageable);
 
-    ResponseEntity<List<BannerDTO>> findAllBanners(Integer page, Integer size, List<String> sort);
+    ResponseEntity<List<BannerDTO>> findAllBanners(Pageable pageable);
 
-    ResponseEntity<List<BannerDTO>> searchBanners(String query, Integer page, Integer size, List<String> sort);
+    ResponseEntity<List<BannerDTO>> searchBanners(String query,Pageable pageable);
 
     ResponseEntity<BannerDTO> findBanner(Long id);
 
-    ResponseEntity<List<NotificationDTO>> findAllNotifications(Integer page, Integer size, List<String> sort);
+    ResponseEntity<List<NotificationDTO>> findAllNotifications(Pageable pageable);
 
-	ResponseEntity<List<NotificationDTO>> searchNotifications(String query, Integer page, Integer size, List<String> sort);
+	ResponseEntity<List<NotificationDTO>> searchNotifications(String query, Pageable pageable);
 
 	ResponseEntity<NotificationDTO> findNotification(Long id);
 
 	ResponseEntity<RefoundDetailsDTO> findRefundDetails(Long id);
 
-	ResponseEntity<List<RefoundDetailsDTO>> findAllRefundDetails(Integer page, Integer size, List<String> sort);
+	ResponseEntity<List<RefoundDetailsDTO>> findAllRefundDetails(Pageable pageable);
 
-	ResponseEntity<List<RefoundDetailsDTO>> searchRefundDetails(String query, Integer page, Integer size,
-			List<String> sort);
+	ResponseEntity<List<RefoundDetailsDTO>> searchRefundDetails(String query, Pageable pageable);
 	
 	public Page<Store> findStoreByName(String name, Pageable pageable);
     

@@ -22,6 +22,7 @@ import com.diviso.graeshoppe.client.offer.model.OfferModel;
 import com.diviso.graeshoppe.client.offer.model.OrderModel;
 import com.diviso.graeshoppe.service.AdministrationCommandService;
 import com.diviso.graeshoppe.service.OfferCommandService;
+import com.diviso.graeshoppe.service.PaymentService;
 
 /**
  * REST controller for managing command service.
@@ -37,6 +38,9 @@ public class CommandResource {
 	 
 	 	@Autowired
 	 	AdministrationCommandService administrationCommandService;
+	 	
+	 	@Autowired
+	 	PaymentService paymentService;
 	 	
 	 	/**
 	     * POST  /offers/create-offer : Create a new offer.
@@ -209,6 +213,14 @@ public class CommandResource {
 			 log.debug("<<<<<<<<< deleteRefoundDetails >>>>>>>>>>>",id);
 			return administrationCommandService.deleteRefundDetails(id);
 		 }
+
+		 @PostMapping("/create/refundDetails/{orderId}/{paymentId}")
+		   public ResponseEntity<RefoundDetailsDTO> createRefund(@RequestBody RefoundDetailsDTO refundDetailsDTO,@PathVariable String orderId,@PathVariable String paymentId) {
+		       log.debug("REST request to save createRefundDetails : {}", refundDetailsDTO+"\n ## orderId = "+orderId+"\n ## paymentId  "+paymentId);
+		      
+		     return paymentService.createRefund(refundDetailsDTO, orderId, paymentId);
+		  
+		   }
 
 	    
 	    
