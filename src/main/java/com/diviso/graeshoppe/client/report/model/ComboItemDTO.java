@@ -13,7 +13,7 @@ import javax.validation.constraints.*;
  * ComboItemDTO
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-12-18T14:43:51.831800400+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-12-23T10:46:04.252727100+05:30[Asia/Calcutta]")
 
 public class ComboItemDTO   {
   @JsonProperty("comboItem")
