@@ -121,7 +121,7 @@ public class QueryResource {
 		 @GetMapping("/findOrderMasterCountByExpectedDeliveryBetween/{from}/{to}")
 		 public ResponseEntity<Long> findOrderMasterCountByExpectedDeliveryBetween(@PathVariable String from,@PathVariable String to){
 			
-			 return null;
+			 return reportQueryService.findOrderMasterCountByExpectedDeliveryBetween(from, to);
 		 }
 		 
 		 /**
