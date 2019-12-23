@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,12 +18,15 @@ import com.diviso.graeshoppe.client.report.model.OrderMaster;
 import com.diviso.graeshoppe.client.report.model.PageOfOrderMaster;
 import com.diviso.graeshoppe.client.report.model.ReportSummary;
 import com.diviso.graeshoppe.service.ReportQueryService;
+import com.diviso.graeshoppe.web.rest.QueryResource;
 
 @Service
 public class ReportQueryServiceImpl implements ReportQueryService {
 
 	@Autowired
 	QueryResourceApi queryResourceApi;
+	
+	private final Logger log = LoggerFactory.getLogger(ReportQueryServiceImpl.class);
 	
 	@Override
 	public ResponseEntity<ReportSummary> createReportSummary(LocalDate date, String storeId) {
@@ -38,6 +43,7 @@ public class ReportQueryServiceImpl implements ReportQueryService {
 	@Override
 	public Long countByExpectedDeliveryAndOrderStatus(LocalDate date, String orderStatus) {
 		
+		log.info("*************dateee{}",date);
 		return queryResourceApi.findOrderCountByDateAndStatusNameUsingGET(date, orderStatus).getBody();
 	}
 
