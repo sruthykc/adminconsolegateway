@@ -25,7 +25,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-12-23T15:54:18.628945800+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-12-23T16:31:55.324124900+05:30[Asia/Calcutta]")
 
 @Api(value = "UniqueOrderIdResource", description = "the UniqueOrderIdResource API")
 public interface UniqueOrderIdResourceApi {

@@ -25,7 +25,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-12-23T15:54:01.391041100+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-12-23T16:31:37.895712600+05:30[Asia/Calcutta]")
 
 @Api(value = "DeductionValueTypeResource", description = "the DeductionValueTypeResource API")
 public interface DeductionValueTypeResourceApi {
