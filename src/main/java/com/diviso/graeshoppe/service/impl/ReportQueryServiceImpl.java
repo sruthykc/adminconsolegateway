@@ -89,6 +89,12 @@ public class ReportQueryServiceImpl implements ReportQueryService {
 		return queryResourceApi.findOrderByDatebetweenAndStoreIdUsingGET(from, storeIdpcode, to, null, null, null);
 	}
 
+	@Override
+	public ResponseEntity<Long> findOrderMasterCountByExpectedDeliveryBetween(String from, String to) {
+		
+		return queryResourceApi.findOrderMasterCountByExpectedDeliveryBetweenUsingGET(from, to);
+	}
+
 	
 	
 

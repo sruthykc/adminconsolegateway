@@ -25,7 +25,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-12-23T13:44:53.092582700+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-12-23T15:54:12.513299100+05:30[Asia/Calcutta]")
 
 @Api(value = "PreOrderSettingsResource", description = "the PreOrderSettingsResource API")
 public interface PreOrderSettingsResourceApi {

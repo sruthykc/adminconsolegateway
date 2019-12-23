@@ -113,6 +113,16 @@ public class QueryResource {
 		 }
 			 
 	
+		 /*
+		 * @GetMapping("/findOrderMasterCountByDeliveryBetween/{from}/{to}") public Long
+		 * findOrderMasterCountByDeliveryBetween(@PathVariable String from,@PathVariable
+		 * String to){ return orderMasterService.countByDeliveryBetween(from,to); }
+		 */
+		 @GetMapping("/findOrderMasterCountByExpectedDeliveryBetween/{from}/{to}")
+		 public ResponseEntity<Long> findOrderMasterCountByExpectedDeliveryBetween(@PathVariable String from,@PathVariable String to){
+			
+			 return null;
+		 }
 		 
 		 /**
 		     * GET  /deduction-value-types : get all the deductionValueTypes of offers.
