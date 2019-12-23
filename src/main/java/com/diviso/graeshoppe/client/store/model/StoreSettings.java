@@ -13,7 +13,7 @@ import javax.validation.constraints.*;
  * StoreSettings
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-12-23T10:46:21.710950800+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-12-23T13:44:53.092582700+05:30[Asia/Calcutta]")
 
 public class StoreSettings   {
   @JsonProperty("deliveryCharge")

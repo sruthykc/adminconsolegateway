@@ -14,7 +14,7 @@ import javax.validation.constraints.*;
  * PaymentDTO
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-12-23T10:46:34.123301600+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-12-23T13:45:05.420752+05:30[Asia/Calcutta]")
 
 public class PaymentDTO   {
   @JsonProperty("amount")

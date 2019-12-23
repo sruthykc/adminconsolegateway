@@ -22,7 +22,7 @@ public interface ReportQueryService {
 
 	public ResponseEntity<PageOfOrderMaster> findByExpectedDeliveryBetweenAndStoreIdpcode(OffsetDateTime from, String storeIdpcode, OffsetDateTime to, Pageable pageable);
 	
-	public Long countByExpectedDeliveryAndOrderStatus(LocalDate date, String orderStatus);
+	public Long countByExpectedDeliveryAndOrderStatus(String date, String orderStatus);
 
 	public Long countByOrderStatus(String orderStatus);
 	

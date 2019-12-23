@@ -29,7 +29,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-12-23T10:46:04.252727100+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-12-23T13:44:34.214202200+05:30[Asia/Calcutta]")
 
 @Api(value = "QueryResource", description = "the QueryResource API")
 public interface QueryResourceApi {
@@ -79,7 +79,7 @@ public interface QueryResourceApi {
     @RequestMapping(value = "/api/findOrderCountByDateAndStatusName/{date}/{statusName}",
         produces = "*/*", 
         method = RequestMethod.GET)
-    ResponseEntity<Long> findOrderCountByDateAndStatusNameUsingGET(@ApiParam(value = "date",required=true) @PathVariable("date") LocalDate date,@ApiParam(value = "statusName",required=true) @PathVariable("statusName") String statusName);
+    ResponseEntity<Long> findOrderCountByDateAndStatusNameUsingGET(@ApiParam(value = "date",required=true) @PathVariable("date") String date,@ApiParam(value = "statusName",required=true) @PathVariable("statusName") String statusName);
 
 
     @ApiOperation(value = "findOrderCountByStatusName", nickname = "findOrderCountByStatusNameUsingGET", notes = "", response = Long.class, tags={ "query-resource", })

@@ -13,7 +13,7 @@ import javax.validation.constraints.*;
  * DeductionValueTypeDTO
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-12-23T10:46:10.150217900+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-12-23T13:44:40.551854300+05:30[Asia/Calcutta]")
 
 public class DeductionValueTypeDTO   {
   @JsonProperty("deductionValueType")

@@ -41,9 +41,9 @@ public class ReportQueryServiceImpl implements ReportQueryService {
 	}
 
 	@Override
-	public Long countByExpectedDeliveryAndOrderStatus(LocalDate date, String orderStatus) {
+	public Long countByExpectedDeliveryAndOrderStatus(String date, String orderStatus) {
 		
-		log.info("*************dateee{}",date);
+		log.debug("*************dateee{}",date);
 		return queryResourceApi.findOrderCountByDateAndStatusNameUsingGET(date, orderStatus).getBody();
 	}
 
