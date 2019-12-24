@@ -25,7 +25,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-12-23T16:31:30.663813200+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-12-24T11:33:18.565+05:30[Asia/Calcutta]")
 
 @Api(value = "ComboItemResource", description = "the ComboItemResource API")
 public interface ComboItemResourceApi {

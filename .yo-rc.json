@@ -36,8 +36,8 @@
     },
     "generator-jhipster-swagger-cli": {
         "promptValues": {
-            "inputSpec": "http://dev.ci2.divisosofttech.com:9090/v2/api-docs",
-            "cliName": "payment"
+            "inputSpec": "http://dev.ci2.divisosofttech.com:8077/v2/api-docs",
+            "cliName": "report"
         },
         "apis": {
             "report": {

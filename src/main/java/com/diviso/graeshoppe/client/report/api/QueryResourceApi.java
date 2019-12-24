@@ -29,7 +29,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-12-23T16:31:30.663813200+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-12-24T11:33:18.565+05:30[Asia/Calcutta]")
 
 @Api(value = "QueryResource", description = "the QueryResource API")
 public interface QueryResourceApi {
@@ -67,7 +67,7 @@ public interface QueryResourceApi {
     @RequestMapping(value = "/api/findOrderByDatebetweenAndStoreId/{from}/{to}/{storeId}",
         produces = "*/*", 
         method = RequestMethod.GET)
-    ResponseEntity<PageOfOrderMaster> findOrderByDatebetweenAndStoreIdUsingGET(@ApiParam(value = "from",required=true) @PathVariable("from") OffsetDateTime from,@ApiParam(value = "storeId",required=true) @PathVariable("storeId") String storeId,@ApiParam(value = "to",required=true) @PathVariable("to") OffsetDateTime to,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort);
+    ResponseEntity<PageOfOrderMaster> findOrderByDatebetweenAndStoreIdUsingGET(@ApiParam(value = "from",required=true) @PathVariable("from") String from,@ApiParam(value = "storeId",required=true) @PathVariable("storeId") String storeId,@ApiParam(value = "to",required=true) @PathVariable("to") String to,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort);
 
 
     @ApiOperation(value = "findOrderCountByDateAndStatusName", nickname = "findOrderCountByDateAndStatusNameUsingGET", notes = "", response = Long.class, tags={ "query-resource", })

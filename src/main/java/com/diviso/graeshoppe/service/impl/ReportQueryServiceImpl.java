@@ -84,8 +84,12 @@ public class ReportQueryServiceImpl implements ReportQueryService {
 	}
 
 	@Override
-	public ResponseEntity<PageOfOrderMaster> findByExpectedDeliveryBetweenAndStoreIdpcode(OffsetDateTime from, String storeIdpcode, OffsetDateTime to, Pageable pageable) {
-		
+	public ResponseEntity<PageOfOrderMaster> findByExpectedDeliveryBetweenAndStoreIdpcode(String from, String storeIdpcode, String to, Pageable pageable) {
+		/*
+		 * Instant fromDate = Instant.parse(from.toString()+"T00:00:00Z"); Instant
+		 * toDate = Instant.parse(to.toString()+"T23:59:59Z")
+		 */
+		log.debug("<<<<<<<<<<<< findByExpectedDeliveryBetweenAndStoreIdpcode >>>>>>>>{}{}",from,to);
 		return queryResourceApi.findOrderByDatebetweenAndStoreIdUsingGET(from, storeIdpcode, to, null, null, null);
 	}
 

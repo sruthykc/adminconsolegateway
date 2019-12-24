@@ -21,7 +21,7 @@ public interface ReportQueryService {
 	
 	public ResponseEntity<ReportSummary> createReportSummary(String expectedDelivery, String storeName);
 
-	public ResponseEntity<PageOfOrderMaster> findByExpectedDeliveryBetweenAndStoreIdpcode(OffsetDateTime from, String storeIdpcode, OffsetDateTime to, Pageable pageable);
+	public ResponseEntity<PageOfOrderMaster> findByExpectedDeliveryBetweenAndStoreIdpcode(String from, String storeIdpcode, String to, Pageable pageable);
 	
 	public Long countByExpectedDeliveryAndOrderStatus(String date, String orderStatus);
 

@@ -68,7 +68,7 @@ public class QueryResource {
 	  }
 	 
 	 @GetMapping("/findOrderByDatebetweenAndStoreId/{from}/{storeId}/{to}")
-		public ResponseEntity<PageOfOrderMaster> findOrderByDatebetweenAndStoreId(@PathVariable OffsetDateTime from,@PathVariable String storeId,@PathVariable OffsetDateTime to,Pageable pageable){
+		public ResponseEntity<PageOfOrderMaster> findOrderByDatebetweenAndStoreId(@PathVariable String from,@PathVariable String storeId,@PathVariable String to,Pageable pageable){
 			return reportQueryService.findByExpectedDeliveryBetweenAndStoreIdpcode(from,storeId,to,pageable);
 	}
 	 
