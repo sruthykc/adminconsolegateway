@@ -380,19 +380,19 @@ public class QueryResource {
 				return administrationQueryService.findStoreByName(name, pageable);
 			}
 			@GetMapping("/findOrderLinesByOrderNumber/{orderId}")
-			public ResponseEntity<List<OrderLine>> findOrderLinesByOrderNumber(String orderId){
+			public ResponseEntity<List<OrderLine>> findOrderLinesByOrderNumber(@PathVariable String orderId){
 				log.debug("<<<<<<<<<< findOrderLinesByOrderNumber >>>>>>>>>{}",orderId);
 				return reportQueryService.findOrderLinesByOrderNumber(orderId);
 				
 			}
 			@GetMapping("/findOfferLinesByOrderNumber/{orderId}")
-			public ResponseEntity<List<OfferLine>> findOfferLinesByOrderNumber(String orderId){
+			public ResponseEntity<List<OfferLine>> findOfferLinesByOrderNumber(@PathVariable String orderId){
 				log.debug("<<<<<<<<<< findOfferLinesByOrderNumber >>>>>>>>>{}",orderId);
 				return reportQueryService.findOfferLinesByOrderNumber(orderId);
 				
 			}
 			@GetMapping("/findAuxItemsLinesById/{id}")
-			public ResponseEntity<List<AuxItem>> findAuxItemsById(Long id){
+			public ResponseEntity<List<AuxItem>> findAuxItemsById(@PathVariable Long id){
 				log.debug("<<<<<<<<<< findAuxItemsById >>>>>>>>>{}",id);
 				return reportQueryService.findOfferLinesById(id);
 				
