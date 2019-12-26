@@ -28,6 +28,9 @@ import com.diviso.graeshoppe.client.administration.model.NotificationDTO;
 import com.diviso.graeshoppe.client.administration.model.RefoundDetailsDTO;
 import com.diviso.graeshoppe.client.offer.model.DeductionValueTypeDTO;
 import com.diviso.graeshoppe.client.offer.model.OfferDTO;
+import com.diviso.graeshoppe.client.report.model.AuxItem;
+import com.diviso.graeshoppe.client.report.model.OfferLine;
+import com.diviso.graeshoppe.client.report.model.OrderLine;
 import com.diviso.graeshoppe.client.report.model.OrderMaster;
 import com.diviso.graeshoppe.client.report.model.PageOfOrderMaster;
 import com.diviso.graeshoppe.client.report.model.ReportSummary;
@@ -57,10 +60,11 @@ public class QueryResource {
 	 private final Logger log = LoggerFactory.getLogger(QueryResource.class);
 
 	 
-	 @GetMapping("/report/{date}/{storeId}")
-		public ResponseEntity<ReportSummary> createReportSummary(@PathVariable LocalDate date,@PathVariable String storeId) {
-			return reportQueryService.createReportSummary(date,storeId);
-		}
+	/*
+	 * @GetMapping("/report/{date}/{storeId}") public ResponseEntity<ReportSummary>
+	 * createReportSummary(@PathVariable String date,@PathVariable String storeId) {
+	 * return reportQueryService.createReportSummary(date,storeId); }
+	 */
 	 
 	 @GetMapping("/reportview/{expectedDelivery}/{storeName}")
 	  public ResponseEntity<ReportSummary> createReportSummary(@PathVariable String expectedDelivery,@PathVariable String storeName) {
@@ -88,12 +92,12 @@ public class QueryResource {
 	}
 	 
 	 
-		@GetMapping("/pdf/{orderNumber}")
-		public ResponseEntity<byte[]> getReportAsPdf(@PathVariable String orderNumber) {
-		       
-		       return reportQueryService.getReportAsPdf(orderNumber);
-		   }
-	 
+	/*
+	 * @GetMapping("/pdf/{orderNumber}") public ResponseEntity<byte[]>
+	 * getReportAsPdf(@PathVariable String orderNumber) {
+	 * 
+	 * return reportQueryService.getReportAsPdf(orderNumber); }
+	 */
 		 @GetMapping("/reportSummary/{date}/{storeId}")
 		 public ResponseEntity<byte[]> getReportSummaryAsPdf(@PathVariable String date,@PathVariable String storeId) {
 		       
@@ -375,13 +379,24 @@ public class QueryResource {
 			public Page<Store> findStoreBySearchTerm(@PathVariable String name, Pageable pageable) {
 				return administrationQueryService.findStoreByName(name, pageable);
 			}
-			
-		
-			
-			
-			
-			
-
+			@GetMapping("/findOrderLinesByOrderNumber/{orderId}")
+			public ResponseEntity<List<OrderLine>> findOrderLinesByOrderNumber(String orderId){
+				log.debug("<<<<<<<<<< findOrderLinesByOrderNumber >>>>>>>>>{}",orderId);
+				return reportQueryService.findOrderLinesByOrderNumber(orderId);
+				
+			}
+			@GetMapping("/findOfferLinesByOrderNumber/{orderId}")
+			public ResponseEntity<List<OfferLine>> findOfferLinesByOrderNumber(String orderId){
+				log.debug("<<<<<<<<<< findOfferLinesByOrderNumber >>>>>>>>>{}",orderId);
+				return reportQueryService.findOfferLinesByOrderNumber(orderId);
+				
+			}
+			@GetMapping("/findAuxItemsLinesById/{id}")
+			public ResponseEntity<List<AuxItem>> findAuxItemsById(Long id){
+				log.debug("<<<<<<<<<< findAuxItemsById >>>>>>>>>{}",id);
+				return reportQueryService.findOfferLinesById(id);
+				
+			}
 }
 
 

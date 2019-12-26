@@ -16,7 +16,7 @@ import javax.validation.constraints.*;
  * PaymentInitiateResponse
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-12-23T16:32:01.096817+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-12-26T12:53:30.695+05:30[Asia/Calcutta]")
 
 public class PaymentInitiateResponse   {
   @JsonProperty("create_time")

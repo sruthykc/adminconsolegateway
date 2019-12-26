@@ -14,6 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.diviso.graeshoppe.client.report.api.QueryResourceApi;
+import com.diviso.graeshoppe.client.report.model.AuxItem;
+import com.diviso.graeshoppe.client.report.model.OfferLine;
+import com.diviso.graeshoppe.client.report.model.OrderLine;
 import com.diviso.graeshoppe.client.report.model.OrderMaster;
 import com.diviso.graeshoppe.client.report.model.PageOfOrderMaster;
 import com.diviso.graeshoppe.client.report.model.ReportSummary;
@@ -29,16 +32,11 @@ public class ReportQueryServiceImpl implements ReportQueryService {
 	private final Logger log = LoggerFactory.getLogger(ReportQueryServiceImpl.class);
 	
 	@Override
-	public ResponseEntity<ReportSummary> createReportSummary(LocalDate date, String storeId) {
-		
-		return queryResourceApi.createReportSummaryUsingGET(date, storeId);
-	}
-
-	@Override
 	public ResponseEntity<ReportSummary> createReportSummary(String expectedDelivery, String storeName) {
 		
-		return queryResourceApi.createReportSummaryUsingGET1(expectedDelivery, storeName);
+		return queryResourceApi.createReportSummaryUsingGET(expectedDelivery, storeName);
 	}
+
 
 	@Override
 	public Long countByExpectedDeliveryAndOrderStatus(String date, String orderStatus) {
@@ -51,12 +49,6 @@ public class ReportQueryServiceImpl implements ReportQueryService {
 	public Long countByOrderStatus(String orderStatus) {
 		
 		return queryResourceApi.findOrderCountByStatusNameUsingGET(orderStatus).getBody();
-	}
-
-	@Override
-	public ResponseEntity<byte[]> getReportAsPdf(String orderNumber) {
-		
-		return queryResourceApi.getReportAsPdfUsingGET(orderNumber);
 	}
 
 	@Override
@@ -98,6 +90,25 @@ public class ReportQueryServiceImpl implements ReportQueryService {
 		
 		return queryResourceApi.findOrderMasterCountByExpectedDeliveryBetweenUsingGET(from, to);
 	}
+
+	@Override
+	public ResponseEntity<List<OrderLine>> findOrderLinesByOrderNumber(String orderId) {
+		log.debug("<<<<<<<<<< findOrderLinesByOrderNumber impl {}",orderId);
+		return queryResourceApi.findOrderLineByOrderNumberUsingGET(orderId);
+	}
+
+	@Override
+	public ResponseEntity<List<OfferLine>> findOfferLinesByOrderNumber(String orderId) {
+		log.debug("<<<<<<<<<<findOfferLinesByOrderNumber >>>>>>>{}",orderId );
+		return queryResourceApi.findOfferLinesByOrderNumberUsingGET(orderId);
+	}
+
+	@Override
+	public ResponseEntity<List<AuxItem>> findOfferLinesById(Long id) {
+		log.debug("<<<<<<< findOfferLinesById >>>>>",id);
+		return queryResourceApi.findAuxItemByidUsingGET(id);
+	}
+	
 
 	
 	
